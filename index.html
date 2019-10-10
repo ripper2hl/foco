@@ -1,0 +1,61 @@
+<html>
+  <body>
+      <img id="thumbnail_img" style="display:none" />
+      <video id="my_video" src="video.mp4" controls ></video>
+      <canvas id="thecanvas" style="display:none" >
+       </canvas>
+  </body>
+  <script src="color-thief.umd.js"></script>
+  <script type="text/javascript">
+    
+    var video = document.getElementById('my_video');
+   var thecanvas = document.getElementById('thecanvas');
+var img = document.getElementById('thumbnail_img');
+
+
+video.addEventListener('pause', function(){
+           draw( video, thecanvas, img);
+           sendColor();
+}, false);
+    
+            function draw( video, thecanvas, img ){
+ 
+		// get the canvas context for drawing
+		var context = thecanvas.getContext('2d');
+ 
+		// draw the video contents into the canvas x, y, width, height
+                context.drawImage( video, 0, 0, thecanvas.width, thecanvas.height);
+ 
+		// get the image data from the canvas object
+                var dataURL = thecanvas.toDataURL();
+ 
+		// set the source of the img tag
+		img.setAttribute('src', dataURL);
+ 
+            }
+            
+    const rgbToHex = (r, g, b) => [r, g, b].map(x => {
+      const hex = x.toString(16)
+      return hex.length === 1 ? '0' + hex : hex
+    }).join('')
+
+function sendColor(){
+  const colorThief = new ColorThief();
+      var img = document.getElementById('thumbnail_img');
+      console.log(img);
+      // Make sure image is finished loading
+      if (img.complete) {
+        let colorP = colorThief.getColor(img);
+        fetch('http://localhost:3000/color/' + rgbToHex( colorP[0], colorP[1], colorP[2] ));
+      } else {
+        img.addEventListener('load', function() {
+          let colorP = colorThief.getColor(img);
+          fetch('http://localhost:3000/color/' + rgbToHex( colorP[0], colorP[1], colorP[2] ));
+        });
+      }  
+}
+
+        
+        
+  </script>
+</html>
