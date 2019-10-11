@@ -12,6 +12,10 @@ app.get('/video.mp4', function (req, res) {
   res.sendFile(__dirname + '/video.mp4');
 });
 
+app.get('/script.js', function (req, res) {
+  res.sendFile(__dirname + '/script.js');
+});
+
 app.get('/color-thief.umd.js', function (req, res) {
   res.sendFile(__dirname + '/color-thief.umd.js');
 });
