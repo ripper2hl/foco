@@ -22,7 +22,7 @@ app.get('/color-thief.umd.js', function (req, res) {
 
 app.get('/color/:color', function (req, res) {
   
-  light.set_rgb(parseInt( req.params.color.replace('#',''),16), 'sudden', 30);
+  light.set_rgb(parseInt( req.params.color.replace('#',''),16), 'smooth', 1500);
   res.send(true);
 });
 
