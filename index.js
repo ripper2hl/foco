@@ -3,17 +3,27 @@ const express = require('express');
 const app = express();
 const Color = require('color');
 let light;
+let isLightBeforeValue = 0;
 
 app.use(express.static('public'));
 
 app.get('/color/:color', function (req, res) {
   let color = Color('#' + req.params.color);
-  let luminosity = (color.luminosity() * 200).toFixed(0);
-  light.set_rgb(parseInt( req.params.color ,16), 'smooth', 500);
-  light.set_bright( luminosity,'smooth' , 500);
+  let bright = color.isLight() ? 80: 0;
+  
+  light.set_rgb(parseInt( req.params.color ,16), 'smooth', 1000)
+  .catch(err => { console.error( err ) });
+  
+  if( isLightBeforeValue !== bright){
+    light.set_bright( bright,'smooth' , 1000)
+    .catch(err => { console.error( err ) });
+    isLightBeforeValue = bright;  
+      console.info( 'bright is changed' );  
+  }
+
   console.info( '******************************' );
   console.info( 'color: ', '#' + req.params.color );
-  console.info( 'luminosity: ', luminosity );
+  console.info( 'is light: ',  color.isLight() );
   console.info( '******************************' );
   res.send(true);
 });
