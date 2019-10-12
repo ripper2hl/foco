@@ -12,7 +12,7 @@ app.get('/color/:color', function (req, res) {
   light.set_rgb(parseInt( req.params.color ,16), 'smooth', 500);
   light.set_bright( luminosity,'smooth' , 500);
   console.info( '******************************' );
-  console.info( 'color: ', req.params.color );
+  console.info( 'color: ', '#' + req.params.color );
   console.info( 'luminosity: ', luminosity );
   console.info( '******************************' );
   res.send(true);
