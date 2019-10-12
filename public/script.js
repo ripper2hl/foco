@@ -19,7 +19,7 @@ video.addEventListener('play', function() {
     }else{
       draw(video, thecanvas, img);
     }
-  }, 2400 );
+  }, 2500 );
   
 }, false);
 
