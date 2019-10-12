@@ -52,6 +52,5 @@ const rgbToHex = (r, g, b) => [r, g, b].map(x => {
 
 img.addEventListener('load', function() {
   let colorP = colorThief.getColor(img);
-  console.log(colorP);
   fetch('http://localhost:3000/color/' + rgbToHex(colorP[0], colorP[1], colorP[2]));
 });
