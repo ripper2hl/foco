@@ -4,21 +4,7 @@ const express = require('express');
 const app = express();
 let light;
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
-
-app.get('/video.mp4', function (req, res) {
-  res.sendFile(__dirname + '/video.mp4');
-});
-
-app.get('/script.js', function (req, res) {
-  res.sendFile(__dirname + '/script.js');
-});
-
-app.get('/color-thief.umd.js', function (req, res) {
-  res.sendFile(__dirname + '/color-thief.umd.js');
-});
+app.use(express.static('public'));
 
 app.get('/color/:color', function (req, res) {
   
