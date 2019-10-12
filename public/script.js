@@ -2,8 +2,14 @@ const video = document.getElementById('my_video');
 const thecanvas = document.getElementById('thecanvas');
 const img = document.getElementById('thumbnail_img');
 const inputFile = document.getElementById('video-src');
+const buttonWebcam = document.getElementById('webcam-src-button');
 const colorThief = new ColorThief();
 let pararIntervalo = false;
+
+buttonWebcam.addEventListener( 'click', e => {
+  e.preventDefault();
+  webcam();
+});
 
 inputFile.addEventListener( 'change', e =>{
   e.preventDefault();
@@ -54,3 +60,27 @@ img.addEventListener('load', function() {
   let colorP = colorThief.getColor(img);
   fetch('http://localhost:3000/color/' + rgbToHex(colorP[0], colorP[1], colorP[2]));
 });
+
+const constraints = {
+  audio: false,
+  video: {
+    width: 1280, height: 720
+  }
+};
+
+// Access webcam
+async function webcam() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+// Success
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+  video.play();
+}
