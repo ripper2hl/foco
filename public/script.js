@@ -1,16 +1,25 @@
-var video = document.getElementById('my_video');
-var thecanvas = document.getElementById('thecanvas');
-var img = document.getElementById('thumbnail_img');
+const video = document.getElementById('my_video');
+const thecanvas = document.getElementById('thecanvas');
+const img = document.getElementById('thumbnail_img');
+const inputFile = document.getElementById('video-src');
+const colorThief = new ColorThief();
 let pararIntervalo = false;
 
+inputFile.addEventListener( 'change', e =>{
+  e.preventDefault();
+  let videoSrc = inputFile.files[0];
+  video.setAttribute('src', URL.createObjectURL(videoSrc) );
+});
+
 video.addEventListener('play', function() {
+  pararIntervalo = false;
    var id = setInterval( function (){
     if( pararIntervalo ){
       clearInterval(id);
     }else{
       draw(video, thecanvas, img);
     }
-  }, 3000 );
+  }, 2400 );
   
 }, false);
 
@@ -40,8 +49,7 @@ const rgbToHex = (r, g, b) => [r, g, b].map(x => {
   return hex.length === 1 ? '0' + hex : hex
 }).join('')
 
-const colorThief = new ColorThief();
-var img = document.getElementById('thumbnail_img');
+
 img.addEventListener('load', function() {
   let colorP = colorThief.getColor(img);
   console.log(colorP);
