@@ -10,3 +10,7 @@ Puede ser un video que seleccione de sus archivos o capturarlo con la camara web
 yarn install
 yarn run start
 ```
+
+Creditos del icono: 
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
