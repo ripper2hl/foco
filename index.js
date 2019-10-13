@@ -2,6 +2,8 @@ const Yeelight = require('yeelight2');
 const express = require('express');
 const app = express();
 const Color = require('color');
+const open = require('open');
+
 let light;
 let isLightBeforeValue = 0;
 
@@ -34,5 +36,6 @@ Yeelight.discover(function(l){
 });
 
 app.listen(3000, function () {
+  open('http://localhost:3000/', {app: ['google-chrome']});
   console.log('Example app listening on port 3000!');
 });
