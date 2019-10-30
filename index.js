@@ -7,7 +7,7 @@ const open = require('open');
 let light;
 let isLightBeforeValue = 0;
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/color/:color', function (req, res) {
   let color = Color('#' + req.params.color);
