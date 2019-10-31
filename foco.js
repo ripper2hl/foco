@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Yeelight = require('yeelight2');
 const express = require('express');
 const app = express();
