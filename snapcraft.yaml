@@ -1,0 +1,17 @@
+name: foco
+version: git
+summary: Usa la escena del video y hace que el foco Yeelight se adapte ese color..
+description: |
+  test
+
+confinement: devmode
+base: core18
+
+parts:
+  foco:
+    plugin: nodejs
+    source: .
+
+apps:
+  foco:
+    command: test
