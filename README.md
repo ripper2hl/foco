@@ -1,5 +1,7 @@
 # foco
 
+[![Snap  Status](https://build.snapcraft.io/badge/ripper2hl/foco.svg)](https://build.snapcraft.io/user/ripper2hl/foco)
+
 Usa la escena del video y hace que el foco Yeelight se adapte ese color.
 
 Puede ser un video que seleccione de sus archivos o capturarlo con la camara web.
