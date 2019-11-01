@@ -16,3 +16,5 @@ apps:
   foco:
     command: foco
     plugs: [network-bind]
+    daemon: simple
+    restart-condition: always
