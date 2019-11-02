@@ -1,8 +1,11 @@
 name: foco
 version: git
-summary: Usa la escena del video y hace que el foco Yeelight se adapte ese color..
+summary: Use the video scene and make the Yeelight spot adapt that color.
+icon: foco.svg
+type: app
+title: foco
 description: |
-  test
+  Use the video scene and make the Yeelight spot adapt that color.
 
 confinement: devmode
 base: core18

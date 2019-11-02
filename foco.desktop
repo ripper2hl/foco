@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment[es_MX]=
+Comment=
+Exec=/opt/google/chrome/google-chrome --profile-directory=Default http://localhost:3000
+GenericName[es_MX]=
+GenericName=
+Icon=foco.png
+MimeType=
+Name[es_MX]=foco
+Name=foco
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
