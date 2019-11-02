@@ -3,15 +3,19 @@
   <link rel="stylesheet" href="index.css">
 </head>
   <body>
-    <div id="container" >      
+    <div id="container" >
       <video id="my_video" src=""  poster="video.png" controls ></video>
       <label id="video-src-button" for="video-src">Selecciona el video</label>
-      <button id="webcam-src-button" >O usa la webcam</button>
+      <button id="webcam-src-button" >usa la webcam</button>
+      <a id="qr-button" href="#qr" >O lee el QR para abrirlo en tu celular</a>
       
       <input id="video-src" type="file" name="video-src" style="display:none" >
       <img id="thumbnail_img" style="display:none" />
       <canvas id="thecanvas" style="display:none" >
       </canvas>
+      <div id="qr-container" >
+        <img id="qr" src="/qr" />
+      </div>
     </div>
   </body>
   <script src="color-thief.umd.js" type="text/javascript" ></script>

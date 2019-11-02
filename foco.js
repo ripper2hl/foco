@@ -13,7 +13,11 @@ const pems = selfsigned.generate(attrs, { days: 365 });
 const credentials = {key: pems.private, cert: pems.cert};
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
-console.log(pems);
+
+const ip = require('ip');
+const QRCode = require('qrcode');
+const httpPort = 3000;
+const httpsPort = 3443;
 
 let light;
 let isLightBeforeValue = 0;
@@ -48,10 +52,17 @@ app.get('/color/:color', function (req, res) {
   res.send(true);
 });
 
-Yeelight.discover(function(l){
-  light = l;
-  console.log(light);
+app.get('/qr', function (req, res) {
+  console.info( '******************************' );
+  console.info( 'IP : ', ip.address() );
+  QRCode.toFileStream(res, 'https://' + ip.address() + ':' + httpsPort, {width: 500} );
+  console.info( '******************************' );
 });
 
-httpServer.listen(3000);
-httpsServer.listen(3443);
+Yeelight.discover(function(l){
+  light = l;
+  console.log('bulb id: ', light.id);
+});
+
+httpServer.listen(httpPort);
+httpsServer.listen(httpsPort);

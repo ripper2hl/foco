@@ -3,7 +3,7 @@
   text-align: center;
 }
 
-#video-src-button, #webcam-src-button {
+#video-src-button, #webcam-src-button, #qr-button {
   background-color: #ba2323;
   padding: 10px;
   font-family: 'Open Sans', sans-serif;
@@ -24,7 +24,7 @@
   background-image: linear-gradient(bottom, rgb(171, 27, 27) 100%, rgb(212, 51, 51) 0%);
 }
 
-video, html, body {
+#qr-container, video, html, body {
   height: 100%;
   width: 100%;
   margin: 0;
