@@ -58,7 +58,11 @@ const rgbToHex = (r, g, b) => [r, g, b].map(x => {
 
 img.addEventListener('load', function() {
   let colorP = colorThief.getColor(img);
-  fetch('http://localhost:3000/color/' + rgbToHex(colorP[0], colorP[1], colorP[2]));
+  fetch('/color/' + rgbToHex(colorP[0], colorP[1], colorP[2]),{
+    headers : {
+      'access-control-allow-origin' : '*'
+    }
+  });
 });
 
 const constraints = {
@@ -74,7 +78,7 @@ async function webcam() {
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
     handleSuccess(stream);
   } catch (e) {
-    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+    console.error(`navigator.getUserMedia error:${e.toString()}`);
   }
 }
 
