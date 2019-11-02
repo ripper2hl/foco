@@ -4,7 +4,16 @@ const Yeelight = require('yeelight2');
 const express = require('express');
 const app = express();
 const Color = require('color');
-const open = require('open');
+
+const http = require('http');
+const https = require('https');
+const selfsigned = require('selfsigned');
+const attrs = [{ name: 'foco', value: 'localhost', type: 'foco' }];
+const pems = selfsigned.generate(attrs, { days: 365 });
+const credentials = {key: pems.private, cert: pems.cert};
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
+console.log(pems);
 
 let light;
 let isLightBeforeValue = 0;
@@ -44,6 +53,5 @@ Yeelight.discover(function(l){
   console.log(light);
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+httpServer.listen(3000);
+httpsServer.listen(3443);
