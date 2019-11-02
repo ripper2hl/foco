@@ -21,3 +21,4 @@ apps:
     plugs: [network-bind]
     daemon: simple
     restart-condition: always
+    desktop: foco.desktop
