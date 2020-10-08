@@ -5,7 +5,8 @@ const inputFile = document.getElementById('video-src');
 const buttonWebcam = document.getElementById('webcam-src-button');
 const colorThief = new ColorThief();
 let pararIntervalo = false;
-
+let colorFile = '';
+let videoCurrentTime = 0;
 buttonWebcam.addEventListener( 'click', e => {
   e.preventDefault();
   webcam();
@@ -18,6 +19,7 @@ inputFile.addEventListener( 'change', e =>{
 });
 
 video.addEventListener('play', function() {
+  video.pause();
   pararIntervalo = false;
    var id = setInterval( function (){
     if( pararIntervalo ){
@@ -25,12 +27,15 @@ video.addEventListener('play', function() {
     }else{
       draw(video, thecanvas, img);
     }
-  }, 2500 );
+  }, 500 );
   
 }, false);
 
-video.addEventListener('pause', function() {
+video.addEventListener('onended', function() {
   pararIntervalo = true;
+  
+  console.log(colorFile);
+  saveFile(colorFile, `${inputFile.files[0].name}.csv` );
 }, false);
 
 
@@ -62,6 +67,13 @@ img.addEventListener('load', function() {
     headers : {
       'access-control-allow-origin' : '*'
     }
+  })
+  .then(response => response.json())
+  .then(data => {
+    colorFile = colorFile.concat(`${data.color}, ${data.bright}, ${videoCurrentTime}  \n` );
+    videoCurrentTime += 2.5;
+    console.log(videoCurrentTime);
+    video.currentTime = videoCurrentTime;
   });
 });
 
@@ -87,4 +99,16 @@ function handleSuccess(stream) {
   window.stream = stream;
   video.srcObject = stream;
   video.play();
+}
+
+function saveFile(data, fileName) {
+    let a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    let blob = new Blob([data], {type: "octet/stream"});
+    let url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
 }

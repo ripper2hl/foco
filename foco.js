@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/color/:color', function (req, res) {
   let color = Color('#' + req.params.color);
-  let bright = color.isLight() ? 80: 0;
+  let bright = color.isLight() ? 100: 20;
   
   light.set_rgb(parseInt( req.params.color ,16), 'smooth', 1000)
   .catch(err => { console.error( err ) });
@@ -49,7 +49,7 @@ app.get('/color/:color', function (req, res) {
   console.info( 'color: ', '#' + req.params.color );
   console.info( 'is light: ',  color.isLight() );
   console.info( '******************************' );
-  res.send(true);
+  res.send({color: req.params.color, bright});
 });
 
 app.get('/qr', function (req, res) {
