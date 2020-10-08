@@ -31,9 +31,9 @@ video.addEventListener('play', function() {
   
 }, false);
 
-video.addEventListener('onended', function() {
+video.addEventListener('ended', function() {
   pararIntervalo = true;
-  
+  videoCurrentTime = 0;
   console.log(colorFile);
   saveFile(colorFile, `${inputFile.files[0].name}.csv` );
 }, false);
@@ -71,7 +71,7 @@ img.addEventListener('load', function() {
   .then(response => response.json())
   .then(data => {
     colorFile = colorFile.concat(`${data.color}, ${data.bright}, ${videoCurrentTime}  \n` );
-    videoCurrentTime += 2.5;
+    videoCurrentTime += 1;
     console.log(videoCurrentTime);
     video.currentTime = videoCurrentTime;
   });
