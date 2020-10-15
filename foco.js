@@ -35,12 +35,12 @@ app.get('/color/:color', function (req, res) {
   let color = Color('#' + req.params.color);
   let bright = color.isLight() ? 100: 20;
   
-  light.set_rgb(parseInt( req.params.color ,16), 'smooth', 1000)
-  .catch(err => { console.error( err ) });
+  //light.set_rgb(parseInt( req.params.color ,16), 'smooth', 1000)
+  //.catch(err => { console.error( err ) });
   
   if( isLightBeforeValue !== bright){
-    light.set_bright( bright,'smooth' , 1000)
-    .catch(err => { console.error( err ) });
+    //light.set_bright( bright,'smooth' , 1000)
+    //.catch(err => { console.error( err ) });
     isLightBeforeValue = bright;  
       console.info( 'bright is changed' );  
   }

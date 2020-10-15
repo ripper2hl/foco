@@ -7,6 +7,7 @@ const colorThief = new ColorThief();
 let pararIntervalo = false;
 let colorFile = '';
 let videoCurrentTime = 0;
+let videoSecondTimeFlag = 0;
 buttonWebcam.addEventListener( 'click', e => {
   e.preventDefault();
   webcam();
@@ -19,7 +20,8 @@ inputFile.addEventListener( 'change', e =>{
 });
 
 video.addEventListener('play', function() {
-  video.pause();
+  video.muted = true
+  video.playbackRate= 2;
   pararIntervalo = false;
    var id = setInterval( function (){
     if( pararIntervalo ){
@@ -33,7 +35,6 @@ video.addEventListener('play', function() {
 
 video.addEventListener('ended', function() {
   pararIntervalo = true;
-  videoCurrentTime = 0;
   console.log(colorFile);
   saveFile(colorFile, `${inputFile.files[0].name}.csv` );
 }, false);
@@ -63,6 +64,7 @@ const rgbToHex = (r, g, b) => [r, g, b].map(x => {
 
 img.addEventListener('load', function() {
   let colorP = colorThief.getColor(img);
+  let colorHex = rgbToHex(colorP[0], colorP[1], colorP[2]);
   fetch('/color/' + rgbToHex(colorP[0], colorP[1], colorP[2]),{
     headers : {
       'access-control-allow-origin' : '*'
@@ -70,10 +72,13 @@ img.addEventListener('load', function() {
   })
   .then(response => response.json())
   .then(data => {
-    colorFile = colorFile.concat(`${data.color}, ${data.bright}, ${videoCurrentTime}  \n` );
-    videoCurrentTime += 1;
-    console.log(videoCurrentTime);
-    video.currentTime = videoCurrentTime;
+    let videoSecond = Math.floor(video.currentTime);
+     if( videoSecond != videoSecondTimeFlag ){
+       if(colorHex.length === 6){
+         colorFile = colorFile.concat(`${colorHex}, ${data.bright}, ${video.currentTime}  \n` );
+       }
+       videoSecondTimeFlag = videoSecond; 
+     }
   });
 });
 
