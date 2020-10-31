@@ -34,22 +34,22 @@ app.use(express.static(__dirname + '/public'));
 app.get('/color/:color', function (req, res) {
   let color = Color('#' + req.params.color);
   let bright = color.isLight() ? 80: 0;
-  
-  light.set_rgb(parseInt( req.params.color ,16), 'smooth', 1000)
-  .catch(err => { console.error( err ) });
-  
+
+  //light.set_rgb(parseInt( req.params.color ,16), 'smooth', 1000)
+  //.catch(err => { console.error( err ) });
+
   if( isLightBeforeValue !== bright){
-    light.set_bright( bright,'smooth' , 1000)
-    .catch(err => { console.error( err ) });
-    isLightBeforeValue = bright;  
-      console.info( 'bright is changed' );  
+    //light.set_bright( bright,'smooth' , 1000)
+    //.catch(err => { console.error( err ) });
+    isLightBeforeValue = bright;
+      console.info( 'bright is changed' );
   }
 
   console.info( '******************************' );
   console.info( 'color: ', '#' + req.params.color );
   console.info( 'is light: ',  color.isLight() );
   console.info( '******************************' );
-  res.send(true);
+  res.send({color: req.params.color, bright});
 });
 
 app.get('/qr', function (req, res) {
