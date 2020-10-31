@@ -20,8 +20,8 @@ inputFile.addEventListener( 'change', e =>{
 });
 
 video.addEventListener('play', function() {
+  video.pause();
   video.muted = true
-  video.playbackRate= 2;
   pararIntervalo = false;
    var id = setInterval( function (){
     if( pararIntervalo ){
@@ -30,7 +30,7 @@ video.addEventListener('play', function() {
       draw(video, thecanvas, img);
     }
   }, 500 );
-  
+
 }, false);
 
 video.addEventListener('ended', function() {
@@ -73,13 +73,15 @@ img.addEventListener('load', function() {
   .then(response => response.json())
   .then(data => {
     let videoSecond = Math.floor(video.currentTime);
-     if( videoSecond != videoSecondTimeFlag ){
-       if(colorHex.length === 6){
-         colorFile = colorFile.concat(`${colorHex}, ${data.bright}, ${video.currentTime}  \n` );
-       }
-       videoSecondTimeFlag = videoSecond; 
-     }
+    if(colorHex.length === 6){
+      colorFile = colorFile.concat(`${colorHex}, ${data.bright}, ${video.currentTime}  \n` );
+      videoCurrentTime += 1;
+      video.currentTime = videoCurrentTime;
+      console.log(videoCurrentTime);
+    }
+
   });
+
 });
 
 const constraints = {
