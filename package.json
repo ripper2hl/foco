@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "color": "^3.1.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ip": "^1.1.5",
     "qrcode": "^1.4.2",
     "selfsigned": "^1.10.7",
